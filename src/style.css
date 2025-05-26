@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
+  --color-dm-secondary: var(--color-slate-950);
+  --color-dm-stroke: #25272b;
+
+  --color-lm-secondary: var(--color-white);
+  --color-lm-stroke: var(--color-gray-200);
+
   --color-mint-500: oklch(0.72 0.11 178);
 }
