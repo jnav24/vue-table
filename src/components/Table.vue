@@ -1,10 +1,16 @@
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends Object">
 import { computed, provide, ref } from 'vue';
 import { type TableColumn, TableContext, type TableContextType } from '../types/table.ts';
 import TablePagination from './TablePagination.vue';
 import TableHeaders from './TableHeaders.vue';
 import TableBody from './TableBody.vue';
 import type { Optional } from '../types/generics.ts';
+
+interface Props<T> {
+    items: T[];
+}
+
+const props = defineProps<Props<T>>();
 
 const headers = ref<Record<string, TableColumn>>({});
 
@@ -35,6 +41,7 @@ const setHeaders = (header: Record<string, Optional<TableColumn, 'width'>>) => {
 };
 
 provide<TableContextType>(TableContext, {
+    data: props.items,
     getHeaders,
     setHeaders,
 });

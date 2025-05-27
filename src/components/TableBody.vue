@@ -8,6 +8,6 @@
         ]"
         class="justify-between"
     >
-        Content
+        <slot />
     </div>
 </template>

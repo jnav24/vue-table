@@ -10,6 +10,7 @@ export interface TableColumn {
 }
 
 export interface TableContextType {
+    data: any[];
     getHeaders: ComputedRef<readonly TableColumn[]>;
     setHeaders: (header: Record<string, Optional<TableColumn, 'width'>>) => void;
 }
