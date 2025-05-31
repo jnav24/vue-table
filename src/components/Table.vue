@@ -5,6 +5,7 @@ import TablePagination from './TablePagination.vue';
 import TableHeaders from './TableHeaders.vue';
 import TableBody from './TableBody.vue';
 import type { Optional } from '../types/generics.ts';
+import TableRow from './TableRow.vue';
 
 interface Props<T> {
     items: T[];
@@ -42,6 +43,7 @@ const setHeaders = (header: Record<string, Optional<TableColumn, 'width'>>) => {
 
 provide<TableContextType>(TableContext, {
     data: props.items,
+    getColSpan,
     getHeaders,
     setHeaders,
 });
@@ -54,7 +56,11 @@ provide<TableContextType>(TableContext, {
         <TableHeaders />
 
         <TableBody>
-            <slot />
+            <template v-slot="slots">
+                <TableRow :data="slots">
+                    <slot />
+                </TableRow>
+            </template>
         </TableBody>
 
         <TablePagination />
