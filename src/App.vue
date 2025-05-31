@@ -1,15 +1,25 @@
 <script setup lang="ts">
 import Table from './components/Table.vue';
 import ColumnBasic from './components/ColumnBasic.vue';
+
+const data = [
+    { id: 1, year: '2025', make: 'BMW', model: 'X6', status: 'Active' },
+    { id: 2, year: '2025', make: 'Cadillac', model: 'Escalade', status: 'Active' },
+    { id: 3, year: '2024', make: 'Mercedes', model: 'GLE Coupe', status: 'Inactive' },
+    { id: 4, year: '2026', make: 'Mercedes-Maybach', model: 'S-Class', status: 'Active' },
+    { id: 5, year: '2023', make: 'Tesla', model: 'Model S', status: 'Inactive' },
+];
 </script>
 
 <template>
     <h1 class="bg-mint-500 mb-4">Table</h1>
 
     <div class="p-4">
-        <Table :items="[]">
-            <ColumnBasic header="Column 1">Column One</ColumnBasic>
-            <ColumnBasic header="Column 2">Column Two</ColumnBasic>
+        <Table :items="data">
+            <ColumnBasic header="Year" key="year" />
+            <ColumnBasic colspan="2" header="Make" key="make" />
+            <ColumnBasic header="Model" key="model" />
+            <ColumnBasic header="Status" key="status" />
         </Table>
     </div>
 </template>
