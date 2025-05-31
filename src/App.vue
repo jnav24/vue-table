@@ -16,10 +16,10 @@ const data = [
 
     <div class="p-4">
         <Table :items="data">
-            <ColumnBasic header="Year" key="year" />
-            <ColumnBasic colspan="2" header="Make" key="make" />
-            <ColumnBasic header="Model" key="model" />
-            <ColumnBasic header="Status" key="status" />
+            <ColumnBasic header="Year" notation="year" />
+            <ColumnBasic colspan="2" header="Make" notation="make" />
+            <ColumnBasic header="Model" notation="model" />
+            <ColumnBasic header="Status" notation="status" />
         </Table>
     </div>
 </template>
