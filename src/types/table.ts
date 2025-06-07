@@ -10,6 +10,12 @@ export interface TableColumn {
     width: string;
 }
 
+export interface ColumnProps {
+    header: string;
+    colspan?: number;
+    notation?: string;
+}
+
 export interface TableContextType {
     data: any[];
     getColSpan: (cols: number) => string;

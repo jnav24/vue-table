@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, inject } from 'vue';
 import {
+    type ColumnProps,
     TableContext,
     type TableContextType,
     TableRowContext,
@@ -8,13 +9,7 @@ import {
 } from '../types/table.ts';
 import Typography from './Typography.vue';
 
-interface Props {
-    header: string;
-    colspan?: number;
-    notation?: string;
-}
-
-const props = withDefaults(defineProps<Props>(), { colspan: 1 });
+const props = withDefaults(defineProps<ColumnProps>(), { colspan: 1 });
 
 const tableContext = inject<TableContextType>(TableContext);
 const tableRowContext = inject<TableRowContextType>(TableRowContext);
