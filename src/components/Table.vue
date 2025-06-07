@@ -63,6 +63,6 @@ provide<TableContextType>(TableContext, {
             </template>
         </TableBody>
 
-        <TablePagination />
+        <TablePagination :options="[]" :page="1" :selected="10" :total="10" />
     </div>
 </template>
