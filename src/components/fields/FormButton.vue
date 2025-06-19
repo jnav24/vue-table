@@ -48,6 +48,7 @@ const setIcon = () => {
             'rounded-md p-1': checkbox,
             'rounded-md px-6 py-3 text-sm': !fab && !checkbox,
             'cursor-text bg-gray-300 text-gray-700': isDisabled,
+            'cursor-pointer': !isDisabled,
             'w-full': block,
         }"
         :disabled="isDisabled"
