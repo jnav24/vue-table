@@ -27,10 +27,11 @@ onMounted(() => {
 
 <template>
     <div
-        v-for="(row, idx) in tableContext?.data"
+        v-for="(row, idx) in tableContext?.data?.value ?? []"
         :key="row?.id ?? idx"
         :class="[
-            'border-lm-stroke dark:border-dm-stroke flex flex-row items-center space-x-4 border-0 px-4 py-6 shadow-sm',
+            idx === (tableContext?.data?.value?.length ?? 0) - 1 ? 'border-0' : 'border-b',
+            `border-lm-stroke dark:border-dm-stroke flex flex-row items-center space-x-4 px-4 py-6 shadow-sm`,
             'bg-lm-secondary dark:bg-dm-secondary dark:hover:bg-dm-primary/25 hover:bg-gray-100',
         ]"
         class="justify-between"

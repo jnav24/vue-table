@@ -17,10 +17,12 @@ export interface ColumnProps {
 }
 
 export interface TableContextType {
-    data: any[];
+    data: ComputedRef<any[]>;
     getColSpan: (cols: number) => string;
     getHeaders: ComputedRef<readonly TableColumn[]>;
     setHeaders: (header: Record<string, Optional<TableColumn, 'width'>>) => void;
+    updatePage: (page: number) => void;
+    updateSelectedPaginatePerPage: (page: number) => void;
 }
 
 export interface TableRowContextType {

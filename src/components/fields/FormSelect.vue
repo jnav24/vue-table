@@ -42,7 +42,7 @@ const isValueSelected = computed(
 );
 
 const getPlaceholder = computed(() => {
-    const v = !labelId ? props.value : '';
+    const v = labelId ? props.value : '';
     const obj: SelectItems =
         (props.items ?? []).find((obj: SelectItems) => v === obj[props.itemValue]) ?? {};
 
@@ -77,6 +77,7 @@ const handleClick = () => {
 
 const handleSelection = (value: string) => {
     if (selected.value) {
+        console.log('value', value);
         emit('update:value', value);
         emit('handle-selection', value);
     }
