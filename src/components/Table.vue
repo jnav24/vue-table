@@ -11,14 +11,18 @@ interface Props<T> {
     items: T[];
     paginatePerPage?: number[];
     perPage?: number;
+    selectable?: boolean;
     variant?: 'full' | 'short' | 'numeric';
 }
 
 const props = withDefaults(defineProps<Props<T>>(), {
-    paginatePerPage: [10, 25, 50],
+    paginatePerPage: () => [10, 25, 50],
+    selectable: false,
     variant: 'short',
 });
 
+const allChecked = ref(false);
+const checkedItems = ref<string[]>([]);
 const currentPage = ref(1);
 const headers = ref<Record<string, TableColumn>>({});
 const selectedPaginatePerPage = ref(props.perPage ?? props.paginatePerPage?.[0] ?? null);
@@ -53,10 +57,14 @@ const getColSpan = (col?: number) => {
     return widthClasses[idx] || 'w-full';
 };
 
+const setAllChecked = (v: boolean) => (allChecked.value = v);
+
 const setHeaders = (header: Record<string, Optional<TableColumn, 'width'>>) => {
     const [id, data] = Object.entries(header)[0];
     headers.value = { ...headers.value, [id]: { ...data, width: getColSpan(data.colspan) } };
 };
+
+const toggleCheckedItem = (id: number) => {};
 
 const updatePage = (page: number) => (currentPage.value = page);
 
@@ -64,10 +72,15 @@ const updateSelectedPaginatePerPage = (selected: number) =>
     (selectedPaginatePerPage.value = selected);
 
 provide<TableContextType>(TableContext, {
+    allChecked,
+    checkedItems,
     data: paginateItems,
     getColSpan,
     getHeaders,
+    selectable: props.selectable,
+    setAllChecked,
     setHeaders,
+    toggleCheckedItem,
     updatePage,
     updateSelectedPaginatePerPage,
 });

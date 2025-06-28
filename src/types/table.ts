@@ -1,4 +1,4 @@
-import type { ComputedRef } from 'vue';
+import type { ComputedRef, Ref } from 'vue';
 import type { Optional } from './generics.ts';
 
 export const TableContext = Symbol('TableContext');
@@ -17,10 +17,15 @@ export interface ColumnProps {
 }
 
 export interface TableContextType {
+    allChecked: Ref<boolean>;
+    checkedItems: Ref<string[]>;
     data: ComputedRef<any[]>;
     getColSpan: (cols: number) => string;
     getHeaders: ComputedRef<readonly TableColumn[]>;
+    selectable: boolean;
+    setAllChecked: (v: boolean) => void;
     setHeaders: (header: Record<string, Optional<TableColumn, 'width'>>) => void;
+    toggleCheckedItem: (id: number) => void;
     updatePage: (page: number) => void;
     updateSelectedPaginatePerPage: (page: number) => void;
 }

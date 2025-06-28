@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { inject, onMounted, useSlots } from 'vue';
 import { TableContext, type TableContextType } from '../types/table.ts';
+import FormCheckbox from './fields/FormCheckbox.vue';
 
 const tableContext = inject<TableContextType>(TableContext);
 
@@ -36,6 +37,17 @@ onMounted(() => {
         ]"
         class="justify-between"
     >
-        <slot :row="row" />
+        <FormCheckbox
+            v-if="tableContext?.selectable"
+            :is-checked="
+                tableContext.allChecked.value ||
+                tableContext.checkedItems.value.includes(row?.id ?? idx)
+            "
+            @handleUpdate="tableContext.toggleCheckedItem(row?.id ?? idx)"
+            label=""
+        />
+        <div class="flex grow flex-row items-center justify-between">
+            <slot :row="row" />
+        </div>
     </div>
 </template>
