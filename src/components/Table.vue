@@ -22,7 +22,7 @@ const props = withDefaults(defineProps<Props<T>>(), {
 });
 
 const allChecked = ref(false);
-const checkedItems = ref<string[]>([]);
+const checkedItems = ref<(string | number)[]>([]);
 const currentPage = ref(1);
 const headers = ref<Record<string, TableColumn>>({});
 const selectedPaginatePerPage = ref(props.perPage ?? props.paginatePerPage?.[0] ?? null);
@@ -64,7 +64,11 @@ const setHeaders = (header: Record<string, Optional<TableColumn, 'width'>>) => {
     headers.value = { ...headers.value, [id]: { ...data, width: getColSpan(data.colspan) } };
 };
 
-const toggleCheckedItem = (id: number) => {};
+const toggleCheckedItem = (checked: boolean, id: number | string) => {
+    checkedItems.value = checked
+        ? [...checkedItems.value, id]
+        : checkedItems.value.filter((i) => i !== id);
+};
 
 const updatePage = (page: number) => (currentPage.value = page);
 

@@ -43,7 +43,7 @@ onMounted(() => {
                 tableContext.allChecked.value ||
                 tableContext.checkedItems.value.includes(row?.id ?? idx)
             "
-            @handleUpdate="tableContext.toggleCheckedItem(row?.id ?? idx)"
+            @handleUpdate="tableContext.toggleCheckedItem($event, row?.id ?? idx)"
             label=""
         />
         <div class="flex grow flex-row items-center justify-between">

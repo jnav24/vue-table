@@ -18,14 +18,14 @@ export interface ColumnProps {
 
 export interface TableContextType {
     allChecked: Ref<boolean>;
-    checkedItems: Ref<string[]>;
+    checkedItems: Ref<(string | number)[]>;
     data: ComputedRef<any[]>;
     getColSpan: (cols: number) => string;
     getHeaders: ComputedRef<readonly TableColumn[]>;
     selectable: boolean;
     setAllChecked: (v: boolean) => void;
     setHeaders: (header: Record<string, Optional<TableColumn, 'width'>>) => void;
-    toggleCheckedItem: (id: number) => void;
+    toggleCheckedItem: (checked: boolean, id: number | string) => void;
     updatePage: (page: number) => void;
     updateSelectedPaginatePerPage: (page: number) => void;
 }
