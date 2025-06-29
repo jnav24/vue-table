@@ -10,6 +10,10 @@
   --color-lm-stroke: var(--color-gray-200);
 
   --color-mint-500: oklch(0.72 0.11 178);
+
+  --color-primary: #389894;
+  --color-dm-primary: #264653;
+  --color-lm-primary: #61EAE4FF;
 }
 
 body {

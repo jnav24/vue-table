@@ -38,7 +38,7 @@ const setIcon = () => {
         :class="{
             'border border-gray-300 bg-white text-gray-700 hover:bg-gray-100 active:bg-gray-200':
                 color === 'default' && !isDisabled,
-            'active:bg-dark-primary bg-dm-primary hover:bg-opacity-85 text-white':
+            'active:bg-dark-primary bg-dm-primary hover:bg-opacity-85 border text-white':
                 color === 'primary' && !isDisabled,
             'bg-dm-secondary hover:bg-opacity-85 active:bg-secondary text-white':
                 color === 'secondary' && !isDisabled,
