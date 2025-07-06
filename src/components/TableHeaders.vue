@@ -9,7 +9,8 @@ const tableContext = inject<TableContextType>(TableContext);
 
 <template>
     <div
-        class="border-lm-stroke bg-lm-stroke text-lm-text-hover dark:border-dm-stroke dark:text-dm-text-hover flex flex-row items-center justify-between space-x-4 rounded-t-xl border-b px-4 py-4"
+        class="border-lm-stroke bg-lm-stroke text-lm-text-hover dark:border-dm-stroke dark:text-dm-text-hover flex flex-row items-center justify-between space-x-4 border-b px-4 py-4"
+        :class="{ 'rounded-t-xl': !tableContext?.selectable }"
     >
         <FormCheckbox
             v-if="tableContext?.selectable"
