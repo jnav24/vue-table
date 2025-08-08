@@ -46,11 +46,11 @@ const startNumber = computed(() => 1 + selected.value * (page.value - 1));
 
         <div class="flex flex-row items-center space-x-2">
             <FormSelect
-                @handle-selection="tableContext.updateSelectedPaginatePerPage($event)"
-                :items="items"
+                @handle-selection="tableContext?.updateSelectedPaginatePerPage(Number($event))"
+                :items="items as any"
                 hide-label
                 label=""
-                :value="selected"
+                :value="selected.toString()"
             />
             <Typography variant="caption">per page</Typography>
         </div>
@@ -58,7 +58,11 @@ const startNumber = computed(() => 1 + selected.value * (page.value - 1));
         <div class="flex flex-row items-center space-x-2">
             <template v-if="pages > 1">
                 <template v-if="variant !== 'short'">
-                    <FormButton checkbox :disabled="page === 1" @click="tableContext.updatePage(1)">
+                    <FormButton
+                        checkbox
+                        :disabled="page === 1"
+                        @click="tableContext?.updatePage(1)"
+                    >
                         <ChevronDoubleLeft
                             :classes="`size-4 ${page === 1 ? 'text-gray-400' : ''}`"
                         />
@@ -67,7 +71,7 @@ const startNumber = computed(() => 1 + selected.value * (page.value - 1));
                 <FormButton
                     checkbox
                     :disabled="page === 1"
-                    @click="tableContext.updatePage(page - 1)"
+                    @click="tableContext?.updatePage(page - 1)"
                 >
                     <ChevronLeft :classes="`size-4 ${page === 1 ? 'text-gray-400' : ''}`" />
                 </FormButton>
@@ -84,7 +88,7 @@ const startNumber = computed(() => 1 + selected.value * (page.value - 1));
                 <FormButton
                     checkbox
                     :disabled="page === pages"
-                    @click="tableContext.updatePage(page + 1)"
+                    @click="tableContext?.updatePage(page + 1)"
                 >
                     <ChevronRight :classes="`size-4 ${page === pages ? 'text-gray-400' : ''}`" />
                 </FormButton>
@@ -92,7 +96,7 @@ const startNumber = computed(() => 1 + selected.value * (page.value - 1));
                     <FormButton
                         checkbox
                         :disabled="page === pages"
-                        @click="tableContext.updatePage(pages)"
+                        @click="tableContext?.updatePage(pages)"
                     >
                         <ChevronDoubleRight
                             :classes="`size-4 ${page === pages ? 'text-gray-400' : ''}`"
