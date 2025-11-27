@@ -14,6 +14,7 @@ export interface ColumnProps {
     header: string;
     colspan?: number;
     notation?: string;
+    searchable?: string;
 }
 
 export interface TableContextType {

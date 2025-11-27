@@ -6,6 +6,7 @@ import TableHeaders from './TableHeaders.vue';
 import TableBody from './TableBody.vue';
 import type { Optional } from '../types/generics.ts';
 import TableRow from './TableRow.vue';
+import TableOptions from './TableOptions.vue';
 
 interface Props<T> {
     items: T[];
@@ -94,6 +95,8 @@ provide<TableContextType>(TableContext, {
     <div
         class="border-lm-stroke bg-lm-secondary dark:border-dm-stroke dark:bg-dm-secondary rounded-xl border"
     >
+        <TableOptions />
+
         <TableHeaders />
 
         <TableBody>
