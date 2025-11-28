@@ -31,7 +31,9 @@ const endNumber = computed(() => {
     const value = selected.value * page.value;
     return total.value < value ? total.value : value;
 });
-const items = computed(() => options.value.map((op) => ({ label: op.toString(), value: op })));
+const items = computed(() =>
+    options.value.map((op) => ({ label: op.toString(), value: op.toString() })),
+);
 const pages = computed(() => Math.ceil(total.value / selected.value));
 const startNumber = computed(() => 1 + selected.value * (page.value - 1));
 </script>
