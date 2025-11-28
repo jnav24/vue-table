@@ -92,7 +92,7 @@ const setHeaders = (header: Record<string, Optional<TableColumn, 'width'>>) => {
 };
 
 const setSearchable = (notation: string) => {
-    searchable.value = { [notation]: true };
+    searchable.value = { ...searchable.value, [notation]: true };
 };
 
 const toggleCheckedItem = (checked: boolean, id: number | string) => {
