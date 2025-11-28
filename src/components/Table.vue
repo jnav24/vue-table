@@ -26,6 +26,7 @@ const allChecked = ref(false);
 const checkedItems = ref<(string | number)[]>([]);
 const currentPage = ref(1);
 const headers = ref<Record<string, TableColumn>>({});
+const searchable = ref({});
 const selectedPaginatePerPage = ref(props.perPage ?? props.paginatePerPage?.[0] ?? null);
 
 const filteredItems = computed(() => props.items);
@@ -38,6 +39,8 @@ const paginateItems = computed(() =>
 );
 
 const getHeaders = computed<TableColumn[]>(() => Object.values(headers.value));
+
+const hasSearchableItems = computed(() => Object.keys(searchable.value).length > 0);
 
 const getColSpan = (col?: number) => {
     const widthClasses = {
@@ -65,6 +68,10 @@ const setHeaders = (header: Record<string, Optional<TableColumn, 'width'>>) => {
     headers.value = { ...headers.value, [id]: { ...data, width: getColSpan(data.colspan) } };
 };
 
+const setSearchable = (notation: string) => {
+    searchable.value = { [notation]: true };
+};
+
 const toggleCheckedItem = (checked: boolean, id: number | string) => {
     checkedItems.value = checked
         ? [...checkedItems.value, id]
@@ -82,9 +89,11 @@ provide<TableContextType>(TableContext, {
     data: paginateItems,
     getColSpan,
     getHeaders,
+    hasSearchableItems,
     selectable: props.selectable,
     setAllChecked,
     setHeaders,
+    setSearchable,
     toggleCheckedItem,
     updatePage,
     updateSelectedPaginatePerPage,

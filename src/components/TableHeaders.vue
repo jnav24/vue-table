@@ -9,8 +9,7 @@ const tableContext = inject<TableContextType>(TableContext);
 
 <template>
     <div
-        class="border-lm-stroke bg-lm-stroke text-lm-text-hover dark:border-dm-stroke dark:text-dm-text-hover flex flex-row items-center justify-between space-x-4 border-b px-4 py-4"
-        :class="{ 'rounded-t-xl': !tableContext?.selectable }"
+        class="border-lm-stroke text-lm-text-hover dark:border-dm-stroke dark:text-dm-text-hover flex flex-row items-center justify-between space-x-4 border-b px-4 py-4"
     >
         <FormCheckbox
             v-if="tableContext?.selectable"
@@ -19,12 +18,12 @@ const tableContext = inject<TableContextType>(TableContext);
             label=""
         />
         <div class="flex grow flex-row items-center justify-between">
-            <template v-for="(column, index) in tableContext?.getHeaders?.value" :key="index">
+            <template v-for="(column, index) in tableContext?.getHeaders?.value ?? []" :key="index">
                 <div :class="column.width" class="flex items-center space-x-2">
-                    <Typography variant="body1">
-                        {{ column.label }}
+                    <Typography variant="caption">
+                        <strong>{{ column.label }}</strong>
                     </Typography>
-                    <button>^</button>
+                    <button v-if="column?.sortable">^</button>
                 </div>
             </template>
         </div>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, onMounted, useSlots } from 'vue';
+import { inject, onMounted, type Slots, useSlots, type VNode } from 'vue';
 import { TableContext, type TableContextType } from '../types/table.ts';
 import FormCheckbox from './fields/FormCheckbox.vue';
 
@@ -9,15 +9,21 @@ const slots = useSlots();
 
 onMounted(() => {
     if (slots.default) {
-        const slot = slots.default()[0];
-        const children = slot.children?.default()?.[0]?.children ?? [];
+        const slot = slots.default()[0] as unknown as VNode;
+        const children = (slot.children as Slots)?.default?.()?.[0]?.children ?? [];
 
-        children.map((child: { props: { header: string; colspan?: number } }) => {
-            const label = child.props.header ?? '';
+        (children as unknown as VNode[]).map((child) => {
+            const label = child?.props?.header ?? '';
             const id = label.toLowerCase().replace(/\s+/g, '_');
+
+            if (child?.props?.hasOwnProperty('searchable') && child?.props?.searchable !== false) {
+                const item = child?.props?.notation ?? child?.props?.header?.toLowerCase();
+                tableContext?.setSearchable(item);
+            }
+
             tableContext?.setHeaders({
                 [id]: {
-                    colspan: Number(child.props.colspan ?? 1),
+                    colspan: Number(child?.props?.colspan ?? 1),
                     label,
                 },
             });
