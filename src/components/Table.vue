@@ -113,6 +113,7 @@ provide<TableContextType>(TableContext, {
     getColSpan,
     getHeaders,
     hasSearchableItems,
+    searchKey,
     selectable: props.selectable,
     setAllChecked,
     setHeaders,

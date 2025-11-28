@@ -25,6 +25,7 @@ export interface TableContextType {
     getColSpan: (cols: number) => string;
     getHeaders: ComputedRef<readonly TableColumn[]>;
     hasSearchableItems: ComputedRef<boolean>;
+    searchKey: Ref<string>;
     selectable: boolean;
     setAllChecked: (v: boolean) => void;
     setHeaders: (header: Record<string, Optional<TableColumn, 'width'>>) => void;
