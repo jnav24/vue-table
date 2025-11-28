@@ -27,9 +27,26 @@ const checkedItems = ref<(string | number)[]>([]);
 const currentPage = ref(1);
 const headers = ref<Record<string, TableColumn>>({});
 const searchable = ref({});
+const searchKey = ref('');
 const selectedPaginatePerPage = ref(props.perPage ?? props.paginatePerPage?.[0] ?? null);
 
-const filteredItems = computed(() => props.items);
+const filteredItems = computed(() => {
+    const searchableKeys = Object.keys(searchable.value);
+
+    if (searchKey.value && searchableKeys.length) {
+        return props.items.filter((item) => {
+            return searchableKeys.some((key) => {
+                const value = parseObjectValue(key, item);
+                return (
+                    typeof value === 'string' &&
+                    (value as string).toLowerCase().includes(searchKey.value.toLowerCase())
+                );
+            });
+        });
+    }
+
+    return props.items;
+});
 
 const paginateItems = computed(() =>
     filteredItems.value.slice(
@@ -59,6 +76,12 @@ const getColSpan = (col?: number) => {
     };
     const idx = `${col || 1}` as keyof typeof widthClasses;
     return widthClasses[idx] || 'w-full';
+};
+
+const parseObjectValue = (value: string, obj: Record<string, any>) => {
+    return value.split('.').reduce((result, current) => {
+        return result[current] ?? '';
+    }, obj);
 };
 
 const setAllChecked = (v: boolean) => (allChecked.value = v);
