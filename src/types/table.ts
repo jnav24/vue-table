@@ -18,6 +18,15 @@ export interface ColumnProps {
     searchable?: boolean;
 }
 
+export enum ColumnBadgeColor {
+    DANGER = 'danger',
+    GRAY = 'gray',
+    INFO = 'info',
+    PRIMARY = 'primary',
+    SUCCESS = 'success',
+    WARNING = 'warning',
+}
+
 export interface TableContextType {
     allChecked: Ref<boolean>;
     checkedItems: Ref<(string | number)[]>;
