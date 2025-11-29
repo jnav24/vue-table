@@ -14,9 +14,7 @@ const props = withDefaults(defineProps<ColumnProps>(), { colspan: 1 });
 const tableContext = inject<TableContextType>(TableContext);
 const tableRowContext = inject<TableRowContextType>(TableRowContext);
 
-const columnValue = computed(() => {
-    return props.notation ? tableRowContext?.parseValue(props.notation) : null;
-});
+const columnValue = computed(() => tableRowContext?.getContent(props.header, props.notation));
 
 const columnWidth = computed(() => tableContext?.getColSpan(props.colspan));
 </script>

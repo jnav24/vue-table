@@ -14,7 +14,15 @@ const parseValue = (value: string) => {
     }, props.data?.row);
 };
 
-provide<TableRowContextType>(TableRowContext, { data: props.data?.row, parseValue });
+const getContent = (header: string, notation: string | undefined) => {
+    if (notation) {
+        return parseValue(notation);
+    }
+
+    return props.data?.row?.[header] ?? props.data?.row?.[header.toLowerCase()];
+};
+
+provide<TableRowContextType>(TableRowContext, { data: props.data?.row, getContent, parseValue });
 </script>
 
 <template>

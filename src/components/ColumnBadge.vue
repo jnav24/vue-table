@@ -55,9 +55,7 @@ const badgeColor = computed(() => {
     return colors[index];
 });
 
-const columnValue = computed(() => {
-    return props.notation ? tableRowContext?.parseValue(props.notation) : '';
-});
+const columnValue = computed(() => tableRowContext?.getContent(props.header, props.notation));
 
 const columnWidth = computed(() => tableContext?.getColSpan(props.colspan));
 </script>
